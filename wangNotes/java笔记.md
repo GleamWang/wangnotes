@@ -389,3 +389,100 @@ class Boy {
 
 ```
 
+# 11/30
+
+## Java基础P219-P323
+
+### 四种权限修饰符
+
+(从小到大)private、default、protected、public
+
+![image-20211130084558273](java笔记.assets/image-20211130084558273.png)
+
+### 继承
+
+子类和父类的关系，**不同于**子集和集合
+
+子类继承父类的属性和方法，还可以声明自己的属性和方法。
+
+### 多态
+
+使用前提：类的继承或实现，方法的重写
+
+父类的引用指向子类的对象
+
+```java
+UserService userService = new UserServiceImpl();
+```
+
+当调用字父类同名的方法时，调用的是子类重写父类的方法   -----虚拟方法调用
+
+但是不能调用子类特有的方法
+
+**编译看左边，执行看右边**（只能编译左边有的方法，执行会执行重写的方法）
+
+```jav
+public void doData(Connection conn){//conn = new MySQLConnection();
+}
+```
+
+**对象的多态性只适用于方法，不适用于属性**
+
+### 向下转型(强制类型转换)
+
+![image-20211130144450632](java笔记.assets/image-20211130144450632.png)
+
+```java
+UserService userService = new UserServiceImpl();
+UserServiceImpl userServiceImpl = (UserServiceImpl)userService;
+```
+
+### ==和equals()区别
+
+#### ==运算符
+
++ 可以用在基本数据变量和引用数据变量中
++ 对于基本数据变量：比较两个变量保存的数据是否相同（不一定类型要相同）
++ 对于引用数据变量：比较两个对象的地址值是否相同，即两个引用是否指向同一个对象实体
+
+#### equals()方法
+
++ 只适用于引用数据类型
++ 属于Object类里面的方法，该方法没有被重写默认也是==，String中的equals方法是重写过的
++ 重写equals的话，一般也是实现比较"实体内容"是否相同
+
+> x.equals(null)永远是null; null.equals(x)直接空指针异常
+
+### 包装类(Wrapper)
+
+每个基本数据类型都有包装类，比如：int -> Integer ，使基本数据类型可以使用类的方法
+
+#### String类型=>基本数据类型
+
+调用包装类的parseXxx(String s)方法
+
+```java
+String str = "123";
+int num = Integer.parseInt(str);
+```
+
+### 时间复杂度
+
+时间复杂度大小排序
+
+O(1)<O(logn)<O(n)<O(nlogn)<O(n^2^)<O(n^3^)<O(2^n^)
+
+![image-20211130193540515](java笔记.assets/image-20211130193540515.png)
+
+常见的对数时间复杂度
+
+![image-20211130193716341](java笔记.assets/image-20211130193716341.png)
+
+### static修饰符
+
+static修饰的变量存放在方法区的静态域中，在类加载前已经生成
+
+由于类只会加载一次，所以静态变量在内存中也只会存在一份
+
+静态方法中，只能调用静态的方法和属性；非静态方法中，都可以调用
+
